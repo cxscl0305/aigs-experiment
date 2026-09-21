@@ -55,29 +55,29 @@
     const conditions = {
       G1:{name:'G1 · No AIGS control',format:'none',highlight:'none'},
       G2:{name:'G2 · Tags · Consensus information',format:'tags',highlight:'none'},
-      G3:{name:'G3 · Tags · Conflicting information',format:'tags',highlight:'both'},
-      G4:{name:'G4 · Text · Consensus information',format:'text',highlight:'none'},
-      G5:{name:'G5 · Text · Conflicting information',format:'text',highlight:'both'},
-      G6:{name:'G6 · Text + tags · Consensus information',format:'both',highlight:'none'},
+      G3:{name:'G3 · Text · Consensus information',format:'text',highlight:'none'},
+      G4:{name:'G4 · Text + tags · Consensus information',format:'both',highlight:'none'},
+      G5:{name:'G5 · Tags · Conflicting information',format:'tags',highlight:'both'},
+      G6:{name:'G6 · Text · Conflicting information',format:'text',highlight:'both'},
       G7:{name:'G7 · Text + tags · Conflicting information',format:'both',highlight:'both'}
     };
     const text = {
       none:'Customers appreciate this top for its lightweight feel, attractive color, everyday comfort, and flattering appearance. The fabric quality receives positive feedback — customers find it soft, comfortable, and suitable for everyday wear. Most customers are also satisfied with the fit, finding it true to size and comfortable for casual occasions.',
       h:'Customers appreciate this top for its lightweight feel, attractive color, everyday comfort, and flattering appearance. The fabric quality receives positive feedback — customers find it soft, comfortable, and suitable for everyday wear. However, opinions on fit are divided: some customers find it true to size, whereas others say it runs large.',
       v:'Customers appreciate this top for its lightweight feel, attractive color, everyday comfort, and flattering appearance. Most customers are satisfied with the fit, finding it true to size and comfortable for casual occasions. However, opinions on fabric quality are divided: some customers find the fabric soft and comfortable, whereas others feel it is thinner and lower quality than expected.',
-      both:'Customers appreciate this top for its lightweight feel, attractive color, everyday comfort, and flattering appearance. Opinions on fabric quality are divided: while some customers find it soft and comfortable, others feel it is thinner and lower quality than expected. The fit also receives mixed feedback, with some customers finding it true to size while others say it runs large.'
+      both:'Customers appreciate this top for its lightweight feel and attractive color. However, opinions on the fabric quality are divided — while some customers find it soft and comfortable, others feel it is thinner and lower quality than expected. The fit also receives mixed feedback, with some customers finding it true to size while others say it runs large.'
     };
     const studyConditions=['G1','G2','G3','G4','G5','G6','G7'];
-    const completionCodes={G1:'K7P4',G2:'M4Q8',G3:'J8C4',G4:'R9T3',G5:'P6W2',G6:'V2N6',G7:'X9H5'};
+    const completionCodes={G1:'K7P4',G2:'M4Q8',G3:'R9T3',G4:'V2N6',G5:'J8C4',G6:'P6W2',G7:'X9H5'};
     let active='G1', shown=0, started=false;
     const query = new URLSearchParams(location.search);
     const requested=(query.get('condition')||'').toUpperCase();
     if(studyConditions.includes(requested)){
       active=requested;
     }else{
-      const saved=localStorage.getItem('aigsSevenConditionAssignment');
+      const saved=localStorage.getItem('aigsSevenConditionAssignmentV2');
       active=studyConditions.includes(saved)?saved:studyConditions[Math.floor(Math.random()*studyConditions.length)];
-      localStorage.setItem('aigsSevenConditionAssignment',active);
+      localStorage.setItem('aigsSevenConditionAssignmentV2',active);
     }
     const select=document.getElementById('condition'); Object.entries(conditions).forEach(([key,val])=>{const o=document.createElement('option');o.value=key;o.textContent=val.name;select.appendChild(o)}); select.value=active;
     document.getElementById('researchPanel').classList.add('hidden');
